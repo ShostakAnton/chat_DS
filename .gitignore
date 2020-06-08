@@ -1,0 +1,7 @@
+.idea     # для не записи файлов pycharm
+venv      # для не записи виртуального окружения питона
+local_setting.py
+__pycache__/
+*/__pycache__/
+*.py[cod]
+.pyc
