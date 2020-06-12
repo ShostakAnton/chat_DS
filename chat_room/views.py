@@ -20,10 +20,10 @@ class Dialog(APIView):
     """Диалог чата, сообщение"""
 
     # permission_classes = [permissions.IsAuthenticated, ]        # доступ для авторизованых пользователей
-    permission_classes = [permissions.AllowAny, ]             # доступ для всех пользователей
+    # permission_classes = [permissions.AllowAny, ]             # доступ для всех пользователей
 
     def get(self, request):
-        room = request.GET.get("room")         # н омер комнаты
+        room = request.GET.get("room")         # номер комнаты
         chat = Chat.objects.filter(room=room)
         serializer = ChatSerializers(chat, many=True)
 
