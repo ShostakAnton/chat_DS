@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Room
+from . models import Room, Chat
 
 
 class RoomAdmin(admin.ModelAdmin):
@@ -10,10 +10,10 @@ class RoomAdmin(admin.ModelAdmin):
         return "\n".join([user.username for user in obj.invited.all()])
 
 
-# class ChatAdmin(admin.ModelAdmin):
-#     """Диалоги"""
-#     list_display = ("room", "user", "text", "date")
+class ChatAdmin(admin.ModelAdmin):
+    """Диалоги"""
+    list_display = ("room", "user", "text", "date")
 
 
 admin.site.register(Room, RoomAdmin)
-# admin.site.register(Chat)
+admin.site.register(Chat, ChatAdmin)
