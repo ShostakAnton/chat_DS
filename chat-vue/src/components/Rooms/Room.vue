@@ -1,19 +1,22 @@
 <template>
-    <div>
-        <ul>
-            <li v-for="room in rooms">
-                <h3>{{ room.creater.username }}</h3>
-                {{ room.date }}
-            </li>
-        </ul>
+    <div class="rooms">
+        <div>
+            <ul>
+                <li v-for="room in rooms">
+                    <h3 @click="openDialog(room.id)">{{ room.creater.username }}</h3>
+                    {{ room.date }}
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
     import $ from 'jquery'
+
     export default {
         name: "Room",
-        data() {        // хранение списка наших комнат
+        data() {                // хранение списка комнат
             return {
                 rooms: '',
             }
@@ -34,11 +37,20 @@
                         this.rooms = response.data.date      // присвоение переменной rooms ответа
                     }
                 })
+            },
+            openDialog(id) {
+                this.$emit("openDialog", id)
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .rooms {
+        width: 15%;
+        height: 100%;
+    }
+    h3 {
+        cursor: pointer;
+    }
 </style>
