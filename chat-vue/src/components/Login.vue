@@ -12,7 +12,7 @@
     export default {
         name: "Login",
         data() {
-            return{
+            return {
                 login: '',
                 password: '',
             }
@@ -28,9 +28,9 @@
                     },
                     success: (response) => {
                         alert("Спасибо что Вы с нами")
-                        console.log(response.data.attributes.auth_token)
-                        sessionStorage.setItem("auth_token", response.data.attributes.auth_token)       // сохранение с сессионное хранилище
-                        this.$router.push({name: "home"})
+                        // console.log(response.data.attributes.auth_token)
+                        sessionStorage.setItem("auth_token", response.data.attributes.auth_token)       // сохранение токена в сессионное хранилище
+                        this.$router.push({name: "home"})       // перенапрвление на страницу home
                     },
                     error: (response) => {
                         if (response.status === 400) {
