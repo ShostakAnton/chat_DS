@@ -1,14 +1,10 @@
 <template>
-    <div class="rooms">
-        <div>
-            <ul>
-                <li v-for="room in rooms">
-                    <h3 @click="openDialog(room.id)">{{ room.creater.username }}</h3>
-                    {{ room.date }}
-                </li>
-            </ul>
+    <mu-col span="4" xl="2" class="rooms-list">
+        <div v-for="room in rooms">
+            <h3 @click="openDialog(room.id)">{{ room.creater.username }}</h3>
+            <small>{{ room.date }}</small>
         </div>
-    </div>
+    </mu-col>
 </template>
 
 <script>
@@ -46,11 +42,11 @@
 </script>
 
 <style scoped>
-    .rooms {
-        width: 15%;
-        height: 100%;
-    }
     h3 {
         cursor: pointer;
+    }
+    .rooms-list {
+        margin: 0 10px 0 0;
+        box-shadow: 1px 4px 5px #848181;
     }
 </style>
