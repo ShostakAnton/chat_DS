@@ -1,5 +1,6 @@
 <template>
     <mu-col span="8" xl="9">
+        <AddUsers :room="id"></AddUsers>
         <mu-container class="dialog">
             <mu-row v-for="dialog in dialogs"
                     direction="column"
@@ -26,11 +27,15 @@
 </template>
 
 <script>
+    import AddUsers from './AddUsers.vue'
 
     export default {
         name: "Dialog",
         props: {
             id: '',
+        },
+        components: {
+            AddUsers,
         },
         data() {                // хранение списка диалогов
             return {
