@@ -19,7 +19,7 @@
                                full-width
                                placeholder="Введите текст сообщения">
                 </mu-text-field>
-                <mu-button class="btn-send" round color="success">Отправить</mu-button>
+                <mu-button class="btn-send" round color="success" @click="sendMes">Отправить</mu-button>
             </mu-row>
         </mu-container>
     </mu-col>
@@ -45,7 +45,10 @@
                 headers: {'Authorization': "Token " + sessionStorage.getItem('auth_token')},
                 // "Authorization": "Token 6a57d9af66fcf68b9fac066e67d4a450f5cf667a"
             });
-            this.loadDialog()
+            this.loadDialog()       // загрузка диалога
+            setInterval(() => {     // обновление диалога, каждые 5 секунд
+                this.loadDialog()
+            }, 5000)
         },
         methods: {
             loadDialog() {      // загрузка диалогов
@@ -59,6 +62,22 @@
                         this.dialogs = response.data.data
 
                     },
+                })
+            },
+            sendMes() {
+                $.ajax({
+                    url: "http://127.0.0.1:8000/api/v1/chat/dialog/",
+                    type: "POST",
+                    data: {
+                        room: this.id,
+                        text: this.form.textarea
+                    },
+                    success: (response) => {
+                        this.loadDialog()           //обновление диалога
+                    },
+                    error: (response) => {
+                        alert(response.statusText)
+                    }
                 })
             }
         }

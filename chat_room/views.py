@@ -37,6 +37,6 @@ class Dialog(APIView):
         if dialog.is_valid():
             dialog.save(
                 user=request.user)  # сохроняем сообщение, передаем юзера к которому будет привязано данное сообщение
-            return Response({'status': 'Add'})
+            return Response(status=201)
         else:
-            return Response({'status': 'Error'})
+            return Response(status=400)
