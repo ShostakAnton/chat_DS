@@ -14,11 +14,15 @@ class Rooms(APIView):
     """Комнаты чата"""
     permission_classes = [permissions.IsAuthenticated, ]  # доступ для авторизованых пользователей
 
-    def get(self, request):
+    def get(self, request):  # возвращает список комнат
         rooms = Room.objects.filter(Q(creater=request.user) | Q(invited=request.user))  # выбор тех комнат, где ты или
         # создатель или приглашенный
         serializer = RoomSerializers(rooms, many=True)  # many - для выборки всех связующих моделей
         return Response({'date': serializer.data})
+
+    def post(self, request):  # создание новой комнаты
+        Room.objects.create(creater=request.user)
+        return Response(status=201)
 
 
 class Dialog(APIView):
